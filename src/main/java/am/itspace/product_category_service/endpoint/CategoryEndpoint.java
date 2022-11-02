@@ -16,8 +16,8 @@ public class CategoryEndpoint {
     private final CategoryService categoryService;
 
     @GetMapping("/categories")
-    public List<Category> getAllCategorys() {
-        return categoryService.getAllCategorys();
+    public List<Category> getAllCategories() {
+        return categoryService.getAllCategories();
     }
 
     @PostMapping("/categories")
@@ -44,9 +44,9 @@ public class CategoryEndpoint {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/categories")
-    public ResponseEntity<Category> getProductById(@RequestBody Category category) {
-        Optional<Category> byId = categoryService.findById(category.getId());
+    @GetMapping("/categories/{id}")
+    public ResponseEntity<Category> getProductById(@PathVariable("categoryId") int categoryId) {
+        Optional<Category> byId = categoryService.findById(categoryId);
         if (byId.isEmpty()) {
             return ResponseEntity.notFound().build();
         }

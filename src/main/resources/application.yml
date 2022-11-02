@@ -7,3 +7,7 @@ spring:
     enabled: true
     drop-first: false
     change-log: db/changelog/migration.xml
+
+jwt:
+  secret: poison007
+  expiration: 330000

@@ -37,7 +37,7 @@ public class ProductEndpoint {
         return ResponseEntity.ok(product);
     }
 
-    @DeleteMapping("/product/{id}")
+    @DeleteMapping("/products/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") int id) {
         if (id == 0) {
             return ResponseEntity.badRequest().build();
@@ -53,5 +53,14 @@ public class ProductEndpoint {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(byCategoryId.get());
+    }
+
+    @GetMapping("/products/{userId}")
+    public ResponseEntity<List<Product>> getByUserId(@PathVariable("userId") int id) {
+        Optional<List<Product>> byUserId = productService.findAllByUserId(id);
+        if (byUserId.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(byUserId.get());
     }
 }

@@ -4,7 +4,6 @@ import am.itspace.product_category_service.dto.ProductResponseDto;
 import am.itspace.product_category_service.mapper.ProductMapper;
 import am.itspace.product_category_service.model.Product;
 import am.itspace.product_category_service.repository.ProductRepository;
-import com.datical.liquibase.ext.checks.config.model.AbstractConfigurableRule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +34,9 @@ public class ProductService {
 
     public Optional<Product> findById(int id) {
         return productRepository.findById(id);
+    }
+
+    public Optional<List<Product>> findAllByUserId(int id) {
+        return productRepository.findAllByUserId(id);
     }
 }

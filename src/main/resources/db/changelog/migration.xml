@@ -34,9 +34,44 @@
         </createTable>
     </changeSet>
     <changeSet id="addforeignkey" author="mmanasyan">
-        <addForeignKeyConstraint baseTableName="product" baseColumnNames="category_id" constraintName="category_id_fk"
+        <addForeignKeyConstraint baseTableName="product"
+                                 baseColumnNames="category_id"
+                                 constraintName="category_id_fk"
                                  referencedTableName="category"
                                  referencedColumnNames="id"/>
     </changeSet>
-
+    <changeSet id="addUserAndAdmin" author="mmanasyan">
+        <createTable tableName="user">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="passord" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="ENUM('ADMIN','USER')" defaultValue="USER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="addUserInProduct" author="mmanasyan">
+        <addColumn tableName="product">
+            <column name="user_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="product"
+                                 baseColumnNames="user_id"
+                                 constraintName="product_user_id_user_id_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
   </databaseChangeLog>
